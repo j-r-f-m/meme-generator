@@ -1,0 +1,4 @@
+- create Header
+  -> Header.js
+  -> style Header
+- create meme component
