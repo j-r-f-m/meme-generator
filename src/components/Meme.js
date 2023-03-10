@@ -30,6 +30,7 @@ export default function Meme() {
     // get array with url's
     const memesArray = allMemeImages.data.memes;
     const ranNum = getRandomInt(0, 100);
+
     const url = memesArray[ranNum].url;
 
     setMeme((prevObj) => ({
@@ -38,31 +39,45 @@ export default function Meme() {
       randomImage: url,
     }));
   }
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target;
+    setMeme((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: type === "checkbox" ? checked : value,
+      };
+    });
+  }
+
   return (
-    <div className="main">
+    <main>
       <div className="form">
-        <div className="input--container">
-          <input
-            type="text"
-            className="form--input"
-            placeholder="top text"
-          ></input>
-          <input
-            type="text"
-            className="form--input"
-            placeholder="bottom text"
-          ></input>
-        </div>
-        <button className="form--btn" onClick={getMemeImage}>
-          <p className="form--btn--text">Get new Meme image</p>
-          <img
-            className="form--btn--image"
-            src="/images/picture.png"
-            alt=""
-          ></img>
+        <input
+          type="text"
+          placeholder="Top text"
+          className="form--input"
+          name="topText"
+          value={meme.topText}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="Bottom text"
+          className="form--input"
+          name="bottomText"
+          value={meme.bottomText}
+          onChange={handleChange}
+        />
+        <button className="form--button" onClick={getMemeImage}>
+          Get a new meme image 🖼
         </button>
       </div>
-      <img className="meme--image" src={meme.randomImage} alt=""></img>
-    </div>
+      <div className="meme">
+        <img src={meme.randomImage} className="meme--image" alt="" />
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
+      </div>
+    </main>
   );
 }
