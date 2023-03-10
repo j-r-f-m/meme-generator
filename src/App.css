@@ -167,7 +167,14 @@ body {
   font-weight: 500;
 }
 
-/* ------------------------------- Form ------------------------------------- */
+/* ------------------------------- Main ------------------------------------- */
+.main {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -175,6 +182,11 @@ body {
   align-items: center;
 
   padding: 50px;
+}
+
+.meme--image {
+  padding: 50px;
+  width: 54%;
 }
 
 .input--container {
@@ -210,4 +222,7 @@ body {
 .form-btn-text {
   gap: 25px;
   font-family: "Karla", sans-serif;
+}
+
+.meme--image {
 }
