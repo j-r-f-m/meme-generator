@@ -194,6 +194,8 @@ main {
 
 .meme {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .meme--image {

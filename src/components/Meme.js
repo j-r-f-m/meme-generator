@@ -1,16 +1,16 @@
 import React from "react";
-import memesData from "../memesData.js";
 
 export default function Meme() {
   // create state array
 
-  const [allMemeImages, setAllMemeImages] = React.useState(memesData);
   // create state object
   const [meme, setMeme] = React.useState({
     topText: "",
     bottomText: "",
     randomImage: "https://i.imgflip.com/25w3.jpg",
   });
+
+  const [memeArr, setMemeArr] = React.useState({});
 
   /**
    * returns random number between min and max
@@ -26,12 +26,16 @@ export default function Meme() {
     return Math.floor(Math.random() * (max - min) + min);
   }
 
-  function getMemeImage() {
-    // get array with url's
-    const memesArray = allMemeImages.data.memes;
-    const ranNum = getRandomInt(0, 100);
+  React.useEffect(function () {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((res) => setMemeArr(res.data.memes));
+  }, []);
+  console.log(memeArr);
 
-    const url = memesArray[ranNum].url;
+  function getMemeImage() {
+    const ranNum = getRandomInt(0, 100);
+    const url = memeArr[ranNum].url;
 
     setMeme((prevObj) => ({
       // get all properties of old objects and only change the url
